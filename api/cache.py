@@ -4,7 +4,7 @@ from .server import application
 import os
 
 # Constants
-USE_MEMCACHE = True
+USE_MEMCACHE = False
 
 ## Cache
 cache_config = {}
