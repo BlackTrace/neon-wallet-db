@@ -106,7 +106,7 @@ def storeBlockTransactions(block):
                 except:
                     print("failed on transaction lookup")
                     # print(vin['txid'])
-                    return False
+                    return False, None, None
             t['vin_verbose'] = input_transaction_data
         if 'claims' in t:
             claim_transaction_data = []

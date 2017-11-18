@@ -25,14 +25,6 @@ to
 
 save & exit (ctrl+o, ctrl+x)
 
-put initial data in mongodb
-```
-/etc/init.d/mongodb start
-mongo
-db.meta.insert({"name":"lastTrustedBlock", "value":NumberInt(0)})
-exit
-````
-
 install `neon-wallet-db`
 ```
 cd /home/
@@ -43,6 +35,13 @@ source venv/bin/activate
 pip install wheel
 pip install -r requirements.txt
 ```
+
+put initial data in mongodb (note:do not exist the python virtual environment)
+```
+/etc/init.d/mongodb start
+$(cat .env | grep -v ^# | xargs)
+python init.py
+````
 
 back in your regular terminal
 save the new image so you don't have to re-install everything
@@ -66,18 +65,7 @@ source venv/bin/activate
 heroku local
 ```
 
-first boot you'll see some errors like below, keep it running and ignore them for about 1 minute.
-
-> 11:51:32 worker.1   |    File "/home/neon-wallet-db/api/blockchain.py", line 51, in get_highest_node
-> 11:51:32 worker.1   |      nodes_data = blockchain_db['meta'].find_one({"name":"node_status"})["nodes"]
-> 11:51:32 worker.1   |  TypeError: 'NoneType' object is not subscriptable
-
-
-after that you'll see the something like the following and you're good to go
-> 11:52:25 worker.1   |  11:52:25 default: Job OK (e87cd5d4-fc5c-4dd3-9710-aab7fc3a12bb)
-> 11:52:25 worker.1   |  11:52:25 Result is kept for 500 seconds
-
-you can now confirm it's working
+You can now confirm it's working
 ```
 root@69f0fde7af50:/# curl http://127.0.0.1:5000/v2/network/nodes
 {
