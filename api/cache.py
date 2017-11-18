@@ -1,4 +1,4 @@
-from flask.ext.cache import Cache
+from flask_cache import Cache
 from werkzeug.contrib.cache import MemcachedCache
 from .server import application
 import os

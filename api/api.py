@@ -4,7 +4,7 @@ from bson import json_util
 import json
 from pymongo import MongoClient
 from flask import request
-from flask.ext.cache import Cache
+from flask_cache import Cache
 from flask_cors import CORS, cross_origin
 import os
 from .db import q, transaction_db, blockchain_db, meta_db, logs_db, address_db
