@@ -39,7 +39,7 @@ pip install -r requirements.txt
 put initial data in mongodb (note:do not exit the python virtual environment)
 ```
 /etc/init.d/mongodb start
-$(cat .env | grep -v ^# | xargs)
+export $(cat .env | grep -v ^# | xargs)
 python init.py
 ````
 
