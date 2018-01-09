@@ -49,7 +49,11 @@ def checkSeeds():
 # get the node with the highest block height
 def get_highest_node():
     nodes_data = blockchain_db['meta'].find_one({"name":"node_status"})["nodes"]
-    return sorted([x for x in nodes_data if x["block_height"] != None], key=lambda x: (x["block_height"], -1*x["time"]), reverse=True)[0]["url"]
+    sorted_nodes = sorted([x for x in nodes_data if x["block_height"] != None], key=lambda x: (x["block_height"], -1*x["time"]), reverse=True)
+    if len(sorted_nodes) == 0:
+        raise Exception("No active nodes found in the database\nCheck if the RPC server is enabled and that the nodes are reachable on the network")
+    else:
+        return sorted_nodes[0]["url"]
 
 # get the latest block count and store last block in the database
 def storeBlockInDB(block_index, nodeAPI=False):
