@@ -10,11 +10,8 @@ MONGOAPP = os.environ.get('MONGOAPP')
 # MONGOURL = "mongodb://{}:{}@{}/{}".format(MONGOUSER, MONGOPASS, MONGOURL, MONGOAPP)
 MONGOURL = "mongodb://{}/{}".format(MONGOURL, MONGOAPP)
 
-client = MongoClient(MONGOURL)
+client = MongoClient(MONGOURL, connect=False)
 db = client[MONGOAPP]
-
-# db["meta"].insert_one({"name":"lastTrustedBlock", "value":1162327})
-# db["meta"].insert_one({"name":"lastTrustedTransaction", "value":1162327})
 
 # redis
 
