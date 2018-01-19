@@ -7,15 +7,23 @@ RUN apt-get update && apt-get install -y \
 
 RUN wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
 
-# Echo image number to cache bust local docker images.
-RUN cd /opt/ && echo '0.0.6' && git clone https://github.com/slipo/neon-wallet-db.git
-
 WORKDIR /opt/neon-wallet-db
+COPY api/ /opt/neon-wallet-db/api/
+COPY .env /opt/neon-wallet-db/
+COPY clock.py /opt/neon-wallet-db/
+COPY flask_cache_backends.py /opt/neon-wallet-db/
+COPY init.py /opt/neon-wallet-db/
+COPY newrelic.ini /opt/neon-wallet-db/
+COPY Procfile /opt/neon-wallet-db/
+COPY requirements.txt /opt/neon-wallet-db/
+COPY runtime.txt /opt/neon-wallet-db/
+COPY worker.py /opt/neon-wallet-db/
 
 RUN pip install -r requirements.txt
 
+EXPOSE 5000
+
 CMD export $(cat .env | grep -v ^# | xargs) && \
-    echo "PRIVNET_SEEDS = ['http://$NEOIP:30333','http://$NEOIP:30334','http://$NEOIP:30335','http://$NEOIP:30336']" >> api/util.py && \
     python init.py && \
     heroku local
 

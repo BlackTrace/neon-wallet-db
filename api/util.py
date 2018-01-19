@@ -1,3 +1,5 @@
+import os
+
 ANS_ID = "c56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b"
 ANC_ID = "602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7"
 
@@ -15,8 +17,14 @@ COZ_TESTNET = ["http://test{}.cityofzion.io:8880".format(i) for i in [1,2,3,4,5]
 
 MAINNET_SEEDS = NEO_MAINNET + OTCGO_MAINNET + COZ_MAINNET
 TESTNET_SEEDS = NEO_TESTNET + OTCGO_TESTNET + COZ_TESTNET
-PRIVNET_SEEDS = ["http://127.0.0.1:30333","http://127.0.0.1:30334","http://127.0.0.1:30335","http://127.0.0.1:30336"]
 
+def get_privnet_seeds():
+    private_seeds = os.environ.get("PRIVNET_SEEDS")
+    if private_seeds:
+        return private_seeds.split(',')
+    return False
+
+PRIVNET_SEEDS = get_privnet_seeds()
 
 GENERATION_AMOUNT = [8, 7, 6, 5, 4, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 GENERATION_LENGTH = 22

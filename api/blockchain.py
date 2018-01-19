@@ -28,8 +28,12 @@ def getBlockCount(nodeAPI=False):
     return rpcRequest("getblockcount", [], nodeAPI)
 
 def checkSeeds():
-    # seed_list = MAINNET_SEEDS if net == "MainNet" else TESTNET_SEEDS
-    seed_list = PRIVNET_SEEDS
+    seed_list = TESTNET_SEEDS
+    if net == "MainNet":
+        seed_list = MAINNET_SEEDS
+    elif net == "private":
+        seed_list = PRIVNET_SEEDS
+
     seeds = []
     for test_rpc in seed_list:
         print(test_rpc)
