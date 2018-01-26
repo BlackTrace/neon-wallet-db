@@ -9,9 +9,11 @@ services:
     ports:
       - 5000:5000
     links:
-      - mongodb
+      - mongodb:27017
+      - redis:6379
     depends_on:
       - mongodb
+      - redis
   redis:
     image: redis:latest
     container_name: "redis"

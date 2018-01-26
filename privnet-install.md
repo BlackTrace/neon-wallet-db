@@ -2,7 +2,7 @@
 These instructions assume you start from a working [neo-private-docker](https://github.com/CityOfZion/neo-privatenet-docker)
 
 ```
-./docker_run
+./docker_run.sh
 docker exec -it neo-privnet /bin/bash
 ```
 
