@@ -1,3 +1,5 @@
+Note: This is a complete solution. It expects you're not already running the privnet docker image. It will set up a new one.
+
 [Also available using a prebuilt image here: https://gist.github.com/slipo/f18f1a0b5e6adb7b0bf172b93379d891]
 
 Build and start up the container
