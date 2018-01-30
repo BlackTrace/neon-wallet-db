@@ -1,31 +1,16 @@
-
-These instructions assume you start from a working [neo-private-docker](https://github.com/CityOfZion/neo-privatenet-docker)
-
-```
-./docker_run.sh
-docker exec -it neo-privnet /bin/bash
-```
-
-Now let's set up NeonDB. First we need to copy the sample private network config
-```
-cp .env-privnet-local .env
-```
+[Also available using a prebuilt image here: https://gist.github.com/slipo/f18f1a0b5e6adb7b0bf172b93379d891]
 
 Build and start up the container
 ```
 docker-compose build && docker-compose up
 ```
 
-We need to add a network and make it so the neo-privnet and neon-wallet-db containers can communicate
+Add this line to your hosts file:
 ```
-docker network create privnet
-docker network connect privnet neo-privnet
-docker network connect privnet neon-wallet-db
+127.0.0.1 neo-privnet
 ```
 
-Wait a few seconds for it to connect to the nodes now that it can.
-
-You can now confirm it's working
+It'll take a bit of time to fully initialize but you can now confirm it's working
 ```
 root@69f0fde7af50:/# curl http://127.0.0.1:5000/v2/network/nodes
 {
@@ -41,7 +26,7 @@ root@69f0fde7af50:/# curl http://127.0.0.1:5000/v2/network/nodes
       "block_height": 70,
       "status": true,
       "time": 0.008440256118774414,
-      "url": "http:/neo-privnet:30334"
+      "url": "http://neo-privnet:30334"
     },
     {
       "block_height": 70,
@@ -58,9 +43,3 @@ root@69f0fde7af50:/# curl http://127.0.0.1:5000/v2/network/nodes
   ]
 }
 ```
-
-### Note1:
-If you have a client connecting to NeonDB and then using the seeds directly, with hostname `neo-privnet`, you'll may need to add a line to your hosts file.
-
-### Note2:
-When trying to run this on a VPS you'll have to reconsider how to expose the nodes. By default they'll point to http://127.0.0.1:[30333-30336] when accessing the `/v2/network/nodes` and `/v2/network/best_node` endpoints.
