@@ -9,7 +9,6 @@ RUN wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
 
 WORKDIR /opt/neon-wallet-db
 COPY api/ /opt/neon-wallet-db/api/
-COPY .env /opt/neon-wallet-db/
 COPY clock.py /opt/neon-wallet-db/
 COPY flask_cache_backends.py /opt/neon-wallet-db/
 COPY init.py /opt/neon-wallet-db/

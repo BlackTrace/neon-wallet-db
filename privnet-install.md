@@ -7,7 +7,16 @@ Build and start up the container
 docker-compose build && docker-compose up
 ```
 
-Add this line to your hosts file:
+If you already have neo-privnet running, it's recommended to just stop/remove it and run the command above. If you really don't want to do that, you can delete the neo-privnet container and neo-privnet links in the compose file. Then run:
+
+```
+docker-compose build && docker-compose up
+docker network create privnet
+docker network connect privnet neo-privnet
+docker network connect privnet neon-wallet-db
+```
+
+Either way, next step is to add this line to your hosts file:
 ```
 127.0.0.1 neo-privnet
 ```
