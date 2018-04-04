@@ -14,8 +14,9 @@ OTCGO_TESTNET = [node + ":" + str(TESTNET_PORT) for node in OTCGO_SEED_LIST]
 
 COZ_MAINNET = ["http://seed{}.cityofzion.io:8080".format(i) for i in [1,2,3,4,5]]
 COZ_TESTNET = ["http://test{}.cityofzion.io:8880".format(i) for i in [1,2,3,4,5]]
+O3_MAINNET = ["http://seed{}.o3node.org:10332".format(i) for i in [1,2,3]]
 
-MAINNET_SEEDS = NEO_MAINNET + OTCGO_MAINNET + COZ_MAINNET
+MAINNET_SEEDS = NEO_MAINNET + OTCGO_MAINNET + COZ_MAINNET + O3_MAINNET
 TESTNET_SEEDS = NEO_TESTNET + OTCGO_TESTNET + COZ_TESTNET
 
 def get_privnet_seeds():
