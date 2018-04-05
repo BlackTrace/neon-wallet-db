@@ -20,7 +20,7 @@ COPY worker.py /opt/neon-wallet-db/
 
 RUN pip install -r requirements.txt
 
-EXPOSE 80
+EXPOSE 5000
 
 CMD export $(cat .env | grep -v ^# | xargs) && \
     python init.py && \
